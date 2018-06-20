@@ -11,39 +11,8 @@ mongoose.Promise = global.Promise;
 // Get the default connection
 const db = mongoose.connection;
 
-// Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// const Cat = mongoose.model('Cat', { name: String });
 
-const Cat = mongoose.model('Cat', { name: String });
-
-// const kitty = new Cat({ name: 'Zildjian' });
-// kitty.save().then(() => console.log('meow'));
-
-// Some fake data
-// const books = [
-//   {
-//     title: "Harry Potter and the Sorcerer's stone",
-//     author: 'J.K. Rowling',
-//   },
-//   {
-//     title: 'Jurassic Park',
-//     author: 'Michael Crichton',
-//   },
-// ];
-
-// // The GraphQL schema in string form
-// const typeDefs = `
-//   type Query { books: [Book] }
-//   type Book { title: String, author: String }
-// `;
-
-// // The resolvers
-// const resolvers = {
-// 	Query: { books: () => books },
-// 	Mutation:
-// };
-
-// The GraphQL schema in string form
 const typeDefs = `
 type Cat {
   _id: String!,
