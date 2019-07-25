@@ -7,9 +7,18 @@ const albums = (params, query) => ({
 			_id
 			name {
 				th
+				en
 			}
 			description {
 				th
+				en
+			}
+			photos {
+				url
+				is_default_photo
+			}
+			group {
+				code
 			}
 		}
 	}
@@ -35,7 +44,22 @@ const router = Router();
 router.get('/albums', async (req, res, next) => {
 	try {
 		const result = await res.gql.query(albums);
-		res.json({ albums: result.data.albums });
+		const { locale, group } = req.query;
+
+		let returnedAlbums = result.data.albums.map(album => {
+			const { photos, name, description, ...rest } = album;
+			rest.name = name[locale];
+			rest.description = description[locale];
+			rest.defaultPhoto = photos ? photos.find(photo => photo.is_default_photo) : {};
+
+			return rest;
+		});
+
+		if (group) {
+			returnedAlbums = returnedAlbums.filter(album => album.group.code === group);
+		}
+
+		res.json({ data: returnedAlbums });
 	} catch (error) {
 		res.json({ error: error.message });
 	}

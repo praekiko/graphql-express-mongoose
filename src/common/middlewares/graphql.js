@@ -28,10 +28,10 @@ function reportError(error) {
 	}
 }
 
-export default function(req, res, next) {
+export default function (req, res, next) {
 	res.gql = {
-		query: async q => {
-			const { query, variables } = q(req.params, req.query);
+		query: async getGraphQLQueries => {
+			const { query, variables } = getGraphQLQueries(req.params, req.query);
 			const result = await graphql(rootSchema, query, null, req, variables);
 
 			if (result.errors) {

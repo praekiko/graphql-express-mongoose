@@ -1,22 +1,76 @@
 type Query {
-	albums: [Album],
+	albums: [Album]
 	album(id: String!): Album
 }
 
 type Album {
-	_id: String!,
-	name: LocaleString!, 
-	description: LocaleString!,
+	_id: String!
+	name: LocaleString!
+	description: LocaleString!
 	photos: [AlbumPhotos]
+	group: Group
+	categories: [Category]
+	functions: Functions
+	building_plant: BuildingPlant
+	tags: [String]
 }
 
 type AlbumPhotos {
-	url: String!,
+	url: String!
 	is_default_photo: Boolean
 }
 
 type LocaleString {
-	th: String,
+	th: String
 	en: String
 }
 
+type Group {
+	code: String!
+}
+
+type Category {
+	code: String!
+}
+
+type Functions {
+	bed_rooms: Function
+	rest_rooms: Function
+	floors: Function
+	parking_spaces: Function
+	utility_spaces: Function
+	land_area: Function
+	price: PriceFunction
+}
+
+type Function {
+	id: String!
+	value: Int
+	range: Range
+	dimension: Dimension
+}
+
+type PriceFunction {
+	id: String!
+	value: PriceValue
+	range: Range
+}
+
+type PriceValue {
+	min: Float
+	max: Float
+}
+
+type Range {
+	value: Int!
+}
+
+type Dimension {
+	width: String
+	height: String
+	unit: String
+}
+
+type BuildingPlant {
+	url: String
+}
