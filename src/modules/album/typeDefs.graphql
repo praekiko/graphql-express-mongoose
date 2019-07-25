@@ -1,0 +1,22 @@
+type Query {
+	albums: [Album],
+	album(id: String!): Album
+}
+
+type Album {
+	_id: String!,
+	name: LocaleString!, 
+	description: LocaleString!,
+	photos: [AlbumPhotos]
+}
+
+type AlbumPhotos {
+	url: String!,
+	is_default_photo: Boolean
+}
+
+type LocaleString {
+	th: String,
+	en: String
+}
+

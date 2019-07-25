@@ -9,19 +9,15 @@ import healthCheck from './healthCheck';
 import apiRouters from './apiRouters';
 
 async function initServer(app) {
-  try {
-    const database = await MongoDBUtils.connect();
-    Database.setDb(database);
+	try {
+		const database = await MongoDBUtils.connect();
+		Database.setDB(database);
 
-    console.log(Database.getDb()
-      .collection('albums')
-      .find({}));
-
-    app.use(morgan('dev'));
-    app.use(cors());
-  } catch (err) {
-    throw new Error(err);
-  }
+		app.use(morgan('dev'));
+		app.use(cors());
+	} catch (err) {
+		throw new Error(err);
+	}
 }
 
 const app = express();

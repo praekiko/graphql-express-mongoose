@@ -1,19 +1,6 @@
-import localhost from './config.localhost';
-import develop from './config.develop';
-import production from './config.production';
+import config from './default';
 
-const setupConfig = (env) => {
-  switch (env) {
-    case 'production':
-      return production;
-    case 'develop':
-      return develop;
-    default:
-      return localhost;
-  }
-};
+// console.log('Configuration : ');
+// console.log(config);
 
-const env = process.env.NODE_ENV || 'localhost';
-console.log('Environment =----> ', env);
-
-export default setupConfig(env);
+export default config;
